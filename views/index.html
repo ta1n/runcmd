@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Vs Bike Classification App</title>
+
+
+
+</head>
+<body>
+  
+
+<input id="inp" type="text" placeholder="Enter a command">
+    <button onclick="pt()">Run</button>
+<pre id="op"><pre>
+
+
+
+<script>
+async function postData(url = "", data = {}) {
+  const response = await fetch(url, {
+    method: "POST", 
+    mode: "cors", 
+    cache: "no-cache", 
+    credentials: "same-origin", 
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow", 
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(data), 
+  });
+  return response.json();
+}
+
+async function pt(){
+let ipcmd=document.getElementById('inp').value ;
+    let cmd={cmd:ipcmd} ;
+ postData("http://localhost:3000/cmdrun", cmd).then((data) => {
+  console.log(data); 
+    document.getElementById("op").innerHTML=data.outp ;
+
+ });
+}
+
+
+</script>
+
+</body>
+</html>
